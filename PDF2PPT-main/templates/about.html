@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block script %}
+{% endblock script %}
+
+{% block title %} AboutUs{% endblock title %} 
+
+{% block body %} 
+<!--Team Header-->
+<div class="bg-light py-2">
+  <div class="container py-2">
+    <div class="row mb-1">
+      <div class="col-lg-5">
+        <h2 class="display-4 font-weight-light">Our team</h2>
+        <p class="font-italic text-muted"></p>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <!-- Team item-->
+      <div class="col-xl-4 col-sm-6 mb-3">
+        <div class="bg-white rounded shadow-sm py-5 px-4"><img src="static/m.jpg" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+          <h5 class="mb-0">IT007 Meet Bhanderi</h5><span class="small text-uppercase text-muted">Front-End Developer PDF2PPT</span>
+        </div>
+      </div>
+      <!-- End-->
+
+      <!-- Team item-->
+      <div class="col-xl-4 col-sm-6 mb-3">
+        <div class="bg-white rounded shadow-sm py-5 px-4"><img src="static/s.jpg" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+          <h5 class="mb-0">IT006 Shyam Bhadeshiya</h5><span class="small text-uppercase text-muted">Back-End Developer PDF2PPT</span>
+        </div>
+      </div>
+      <!-- End-->
+
+    </div>
+  </div>
+</div>
+
+<div class="bg-light">
+  <div class="container py-5">
+    <div class="row h-100 align-items-center py-5">
+      <div class="col-lg-6">
+        <h1 class="display-5">About Product</h1>
+        <p class="lead text-muted mb-0">This is unique product.No this type of tool available in market which gives feature to user editng for PPT.
+        Get selected text and pictures from PDF according your choice and placed into PPT. 
+        You can dowload that well formed PPT.</p>
+      </div>
+      <div class="col-lg-6 d-none d-lg-block"><img src="static/creativity.png" alt="" class="img-fluid"></div>
+    </div>
+  </div>
+</div>
+
+<div class="bg-white py-5">
+  <div class="container py-5">
+    <div class="row align-items-center mb-5">
+      <div class="col-lg-6 order-2 order-lg-1"><i class="fa fa-bar-chart fa-2x mb-3 text-primary"></i>
+        <h2 class="font-weight-light">Productivity</h2>
+        <p class="font-italic text-muted mb-5">Copy & Pasting from PDF and put into PPT manually and formatting is very tedious.Here PPT is created automatically for you, you need to just select text and pictures according to your choice from PDF.</p>
+      </div>
+      <div class="col-lg-6 px-5 mx-auto order-1 order-lg-2"><img src="static/quick.png" alt="" class="img-fluid mb-4 mb-lg-0"></div>
+    </div>
+    <div class="row align-items-center">
+      <div class="col-lg-5 px-5 mx-auto"><img src="static/task.png" alt="" class="img-fluid mb-4 mb-lg-0"></div>
+      <div class="col-lg-6"><i class="fa fa-leaf fa-2x mb-3 text-primary"></i>
+        <h2 class="font-weight-light">Easy To Use</h2>
+        <p class="font-italic text-muted mb-4">We made it extremely simple.Our interface is user friendly.Our product is less time consuming</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="bg-light pb-5">
+  <div class="container text-center">
+    <p class="font-italic text-muted mb-0">&copy; Copyrights PDF2PPT All rights reserved.</p>
+  </div>
+</footer>
+
+{% endblock body %}

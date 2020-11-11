@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block script %}
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=yes">
+<meta http-equiv="X-UA-Compatible" contet="ie=edge">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="static/mystyle.css">
+<link rel="stylesheet" href="static/cropper.css">
+<script src="static/cropper.js"></script>
+<script type="text/javascript" src= "static/main.js" defer ></script>
+<script src="static/pdf.js"></script>
+<script src="static/pdf.worker.js"></script>
+
+{% endblock script %}
+ 
+{% block title %} Upload{% endblock title %} 
+
+{% block body %} 
+
+<!--PDF upload section-->
+<div >
+  <form method="post" enctype="multipart/form-data">
+   <div class="d-flex justify-content-center">
+    <div class="d-lg-inline-flex ">
+      {% csrf_token %}
+      <input type="file" id="file-to-upload" name="myfile" accept="application/pdf" required="required">
+      <button id="upload-button" ><i class="fa fa-file" aria-hidden="true"></i> Select PDF</button> 
+    </div>
+   </div>
+  </form>
+</div>
+
+<!--Buttons for selecting text-->
+<div class="btn-group" role="group" style="display: flex; justify-content: center; position: sticky;top: 0;font-size:20px;" >
+  <button type="button" class="btn btn-primary" id="hd" ><i class="fa fa-dot-circle-o" aria-hidden="true"></i> Title</button>
+  <button type="button" class="btn btn-primary" id="mp" ><i class="fa fa-circle" aria-hidden="true"></i> Main Point</button>
+  <button type="button" class="btn btn-primary" id="sp" ><i class="fa fa-circle-o" aria-hidden="true"></i> Sub Point</button>
+  <button type="submit" class="btn btn-primary" id="endt" ><i class="fa fa-file-powerpoint-o" aria-hidden="true"></i> Create PPT</button> 
+</div>
+<hr>
+<!--Loading and Downloading section after PPT is generated-->
+<a id="loading-button" style="display:inline-block;width: 100%;" href="#"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></a>
+<a id="download-file" style="display:inline-block;width: 100%;" href="#" download ><i class="fa fa-download"></i> Download </a> 
+<hr>
+<!--Container where PDF is displayed-->
+<div class="container">
+  <div class="selectable-text-area" style="border: 1rem solid rgba(0,0,0,.1);" >
+     <div id="pdf-main-container">
+		<div id="pdf-loader">Loading document ...</div>
+		<div id="pdf-contents">
+			<div id="pdf-meta">
+				<div id="pdf-buttons">
+					<button id="pdf-prev" class="previous"><i class="fa fa-step-backward" aria-hidden="true"></i></button>
+					<button id="pdf-next" class="next"><i class="fa fa-step-forward" aria-hidden="true"></i></button>
+          <button id="crop-btn"><i class="fa fa-crop" aria-hidden="true"></i> Crop</button>
+          <label>Page: <input id="pgno" type="number" value="1" min="1" style="width:60px"></label>
+          <button id="goto"><i class="fa fa-hand-o-left" aria-hidden="true"></i> GoTo</button>
+				</div>
+				<div id="page-count-container">Page <div id="pdf-current-page"></div> of <div id="pdf-total-pages"></div>
+				</div>
+			</div>
+			<canvas id="pdf-canvas" width="800"></canvas>
+			<div id="text-layer"></div>
+			<div id="page-loader">Loading page ...</div>
+		</div>
+	</div>
+  <!--Modal for crop and upload picture in PPT-->
+  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel">Crop The Photo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="img-container">
+              <img id="image" src="" style="max-width: 100%;">
+            </div>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
+          <button type="button" id="cnu" class="btn btn-primary js-crop-and-upload"><i class="fa fa-file-image-o" aria-hidden="true"></i> Crop and Upload</button>
+          <a id="crpdwnimage" href="#" hidden></a>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock body %}
