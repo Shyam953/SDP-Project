@@ -81,6 +81,9 @@ def edit_lists(request):
             p.space_before = 0 # if any spaces before paragaphs it remove that spaces.
             k = 0
             for mp in title:
+                img_list = mp.findall('img')
+                img_count = len(img_list)
+                marg = 0
                 c = mp.get('id')
                 tf = body_shape.text_frame
                 if(k==0):
@@ -99,6 +102,8 @@ def edit_lists(request):
                         font = p.font
                         font.size = Pt(20)
                         font.color.rgb = RGBColor(0x00, 0x00, 0x80)
+                        
+                #In one slide of PPT we contains maximum 2 images in one slide...
                 
                 for img in mp.findall('img'):
                     data = img.get('id')
@@ -107,9 +112,11 @@ def edit_lists(request):
                     im = Image.open(BytesIO(base64.b64decode(data))) #iVBORw0.... read this string and make a approproate image  
                     im.save(os.path.join(settings.MEDIA_ROOT,'imgpdf2ppt.png'), 'PNG') #save('path','Format') format ie, jpg,png...
                     img_path = os.path.join(settings.MEDIA_ROOT,'imgpdf2ppt.png') 
-                    left = top = Inches(5)
-                    print(img_path)
-                    pic = slide.shapes.add_picture(img_path, Inches(4), Inches(5),width=Inches(3), height=Inches(2))
+                    if(img_count==1):
+                        pic = slide.shapes.add_picture(img_path, Inches(3), Inches(4.3),width=Inches(4), height=Inches(3))
+                    elif(img_count==2):
+                        pic = slide.shapes.add_picture(img_path, Inches(marg+0.5), Inches(4.5),width=Inches(4), height=Inches(3))
+                        marg = marg + 4.5
 
         # get first title for PPT name               
         for title in root: 
