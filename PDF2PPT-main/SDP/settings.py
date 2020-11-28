@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'SDP.urls'
@@ -69,9 +71,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'SDP.wsgi.application'
 #manually
-X_FRAME_OPTIONS = 'SAMEORIGIN'
+ALLOWED_HOSTS=['*']
+CORS_ORIGIN_ALLOW_ALL = True
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+DATA_UPLOAD_MAX_MEMORY_SIZE = 15728640
 SECURE_CONTENT_TYPE_NOSNIFF = False
+
+
 
 #import mimetypes
 #mimetypes.add_type("application/javascript", ".js", True)
